@@ -1,0 +1,39 @@
+.logo {
+    height: 100px;
+}
+
+.container {
+    background-color: var(--background-dark);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding: 25px 50px 10px;
+}
+
+.searchContainer {
+    display: grid;
+
+  
+}
+
+.searchHover {
+  border: 1px solid var(--text);;;
+  outline: none;
+
+  background-position: 13px;
+  border-radius: 10px;
+  width: 100px;
+  max-height: 10px;
+  padding: 25px;
+  transition: all 0.5s;
+  color: var(--text);
+  background-color: var(--background-dark);
+align-self: center;
+justify-self: right;
+  
+}
+.searchHover:hover {
+  width: 180px;
+  padding-left: 50px;
+}
+
+
