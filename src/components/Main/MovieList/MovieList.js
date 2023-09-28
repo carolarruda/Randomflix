@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { getPopularMovies } from '../../../api/index';
+import {get} from '../../../api/index'
 
 const MovieList = () => {
-  const [movies, setMovies] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-console.log(getPopularMovies());    
+    async function fetchMovies() {
+      try {
+        const response = await get(
+          'popular',
+        );
+        setData(response.data.results);
+      } catch (error) {
+        console.error('Error fetching popular movies:', error);
+      }
+    }
 
+    fetchMovies();
   }, []);
 
   return (
     <div>
       <h1>Popular Movies</h1>
-      {/* <ul>
-        {movies.length >0 && movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul> */}
+      <ul>
+        {data.length > 0 &&
+          data.map((movie) => <li key={movie.id}>{movie.title}</li>)}
+      </ul>
     </div>
   );
 };
