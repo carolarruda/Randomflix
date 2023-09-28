@@ -1,4 +1,4 @@
-import logo from "../images/RandomflixDark.png";
+import logo from "../../images/RandomflixDark.png";
 import classes from "./Menu.module.scss";
 
 const Menu = () => {

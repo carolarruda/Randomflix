@@ -6,23 +6,20 @@
     background-color: var(--background-dark);
     display: grid;
     grid-template-columns: auto 1fr;
-    padding: 25px 50px 10px;
+    padding: 15px 50px 15px;
 }
 
 .searchContainer {
     display: grid;
-
-  
 }
 
 .searchHover {
   border: 1px solid var(--text);;;
   outline: none;
-
   background-position: 13px;
   border-radius: 10px;
   width: 100px;
-  max-height: 10px;
+  max-height: 1px;
   padding: 25px;
   transition: all 0.5s;
   color: var(--text);

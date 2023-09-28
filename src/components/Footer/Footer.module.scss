@@ -1,0 +1,16 @@
+.container {
+    background-color: var(--background-dark);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding: 15px 50px 15px;
+}
+
+.tmdb {
+    height: 30px;
+    justify-self: right;
+
+}
+
+p {
+    font-size: var(--text-xs);
+}
