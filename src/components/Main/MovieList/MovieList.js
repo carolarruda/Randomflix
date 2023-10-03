@@ -22,6 +22,7 @@ const MovieList = () => {
       });
 
       setPage((prevPage) => prevPage + 1);
+      console.log(data);
 
     } catch (error) {
       console.error("Error fetching popular movies:", error);
@@ -69,7 +70,11 @@ const MovieList = () => {
               <h2>{movie.title}</h2>
               <h3>{movie.release_date.slice(0, 4)}</h3>
               <span>{movie.vote_average}</span>
-              <div></div>
+              
+              <div>{movie.genre_ids.map((genre)=> (
+                <div>{genre}</div>
+              ))}</div>
+              <p>{movie.overview}</p>
             </div>
           </div>
         ))}
