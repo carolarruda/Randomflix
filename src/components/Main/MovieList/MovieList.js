@@ -6,14 +6,25 @@ const MovieList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const uniqueMovieIds = new Set();
 
   async function fetchMovies() {
     try {
       setLoading(true);
       const response = await get("popular", { page });
-      setData((prevData) => [...prevData, ...response.data.results]);
-      setPage((prevPage) => prevPage + 1); 
-console.log(data);
+
+      const newMovies = response.data.results.filter(
+        (movie) => !uniqueMovieIds.has(movie.id)
+      );
+
+      setData((prevData) => [...prevData, ...newMovies]);
+      newMovies.forEach((movie) => {
+        uniqueMovieIds.add(movie.id);
+      });
+
+      setPage((prevPage) => prevPage + 1);
+      console.log('page',page);
+
     } catch (error) {
       console.error("Error fetching popular movies:", error);
     } finally {
@@ -26,7 +37,6 @@ console.log(data);
   }, []);
 
   useEffect(() => {
-
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
@@ -41,7 +51,7 @@ console.log(data);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); 
+  }, [page]);
 
   return (
     <section className={classes.main}>
@@ -57,9 +67,7 @@ console.log(data);
               <h2>{movie.title}</h2>
               <h3>{movie.release_date.slice(0, 4)}</h3>
               <span>{movie.vote_average}</span>
-              <div>
-           
-              </div>
+              <div></div>
             </div>
           </div>
         ))}
