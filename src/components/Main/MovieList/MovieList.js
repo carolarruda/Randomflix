@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./MovieList.module.scss";
 import { get } from "../../../api/index";
-import Loader from '../../icons/Loader'
+import Loader from "../../icons/Loader";
 
 const MovieList = () => {
   const [data, setData] = useState([]);
@@ -23,7 +23,6 @@ const MovieList = () => {
 
       setPage((prevPage) => prevPage + 1);
       console.log(data);
-
     } catch (error) {
       console.error("Error fetching popular movies:", error);
     } finally {
@@ -35,12 +34,11 @@ const MovieList = () => {
     fetchMovies();
   }, []);
 
-
   useEffect(() => {
     function handleScroll() {
       if (
         window.innerHeight + window.scrollY >=
-        document.documentElement.offsetHeight - 100 
+        document.documentElement.offsetHeight - 100
       ) {
         fetchMovies();
       }
@@ -51,10 +49,7 @@ const MovieList = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-
   }, [page]);
-
-
 
   return (
     <section className={classes.main}>
@@ -70,16 +65,17 @@ const MovieList = () => {
               <h2>{movie.title}</h2>
               <h3>{movie.release_date.slice(0, 4)}</h3>
               <span>{movie.vote_average}</span>
-              
-              <div>{movie.genre_ids.map((genre)=> (
+
+              {/* <div>{movie.genre_ids.map((genre)=> (
                 <div>{genre}</div>
-              ))}</div>
+              ))}</div> */}
               <p>{movie.overview}</p>
             </div>
           </div>
         ))}
-        {loading && <Loader/>}
+        <div className={classes.loaderContainer}></div>
       </div>
+      {loading && <Loader />}
     </section>
   );
 };
