@@ -11,17 +11,11 @@ const MovieList = () => {
 
   async function fetchMovies() {
     try {
-
-
       setLoading(true);
-      
-
       const response = await get("popular", { page });
-
       const newMovies = response.data.results.filter(
         (movie) => !uniqueMovieIds.has(movie.id)
       );
-
       setData((prevData) => [...prevData, ...newMovies]);
       newMovies.forEach((movie) => {
         uniqueMovieIds.add(movie.id);
@@ -39,12 +33,6 @@ const MovieList = () => {
   useEffect(() => {
     fetchMovies();
   }, []);
-
-
-
-
-
-
 
 
   useEffect(() => {
@@ -66,23 +54,6 @@ const MovieList = () => {
   }, [page]);
 
 
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop ===
-  //       document.documentElement.offsetHeight
-  //     ) {
-  //       fetchMovies();
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [page]);
 
   return (
     <section className={classes.main}>
