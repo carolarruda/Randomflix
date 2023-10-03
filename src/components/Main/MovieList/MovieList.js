@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./MovieList.module.scss";
 import { get } from "../../../api/index";
+import Loader from '../../icons/Loader'
 
 const MovieList = () => {
   const [data, setData] = useState([]);
@@ -10,7 +11,11 @@ const MovieList = () => {
 
   async function fetchMovies() {
     try {
+
+
       setLoading(true);
+      
+
       const response = await get("popular", { page });
 
       const newMovies = response.data.results.filter(
@@ -23,7 +28,6 @@ const MovieList = () => {
       });
 
       setPage((prevPage) => prevPage + 1);
-      console.log('page',page);
 
     } catch (error) {
       console.error("Error fetching popular movies:", error);
@@ -36,22 +40,49 @@ const MovieList = () => {
     fetchMovies();
   }, []);
 
+
+
+
+
+
+
+
   useEffect(() => {
-    const handleScroll = () => {
+    function handleScroll() {
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
+        window.innerHeight + window.scrollY >=
+        document.documentElement.offsetHeight - 100 
       ) {
         fetchMovies();
       }
-    };
+    }
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
   }, [page]);
+
+
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop ===
+  //       document.documentElement.offsetHeight
+  //     ) {
+  //       fetchMovies();
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [page]);
 
   return (
     <section className={classes.main}>
@@ -71,7 +102,7 @@ const MovieList = () => {
             </div>
           </div>
         ))}
-        {loading && <p>Loading...</p>}
+        {loading && <Loader/>}
       </div>
     </section>
   );
