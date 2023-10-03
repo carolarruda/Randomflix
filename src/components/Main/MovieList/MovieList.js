@@ -61,7 +61,7 @@ const MovieList = () => {
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt="img"
             />
-            <div>
+            <div className={classes.details}>
               <h2>{movie.title}</h2>
               <h3>{movie.release_date.slice(0, 4)}</h3>
               <span>{movie.vote_average}</span>
