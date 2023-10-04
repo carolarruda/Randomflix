@@ -1,10 +1,10 @@
 import classes from './Main.module.scss'
 import MovieList from './MovieList/MovieList'
 
-const Main = () => {
+const Main = ({search, setSearch}) => {
     return (
         <div className={classes.container}>
-            <MovieList/>
+            <MovieList search={search} setSearch={setSearch}/>
         </div>
     )
 }
