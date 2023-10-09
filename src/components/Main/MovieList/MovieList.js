@@ -34,8 +34,6 @@ const MovieList = ({ search, setSearch }) => {
   async function fetchMoviesSearch() {
     try {
       setData([]);
-
-      console.log("entered movie:");
       setLoading(true);
 
       const apiKey = "c36894549172755979bb9bdfab24093e";
@@ -43,12 +41,12 @@ const MovieList = ({ search, setSearch }) => {
       const searchQuery = encodeURIComponent(search);
       console.log("after enccoding:", searchQuery);
 
-      const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}`;
+      const apiUrl = `https://api.themoviedb.org/3/search/movie?include_adult=false&api_key=${apiKey}&language=en-US&query=${searchQuery}`;
 
-      console.log("after url:", apiUrl);
+
 
       const response = await fetch(apiUrl);
-      console.log(response);
+
 
       if (!response.ok) {
         console.log("here", !response.ok);
@@ -59,8 +57,7 @@ const MovieList = ({ search, setSearch }) => {
       const responseData = await response.json();
       console.log("Response:", responseData);
 
-      const newMovies = responseData.results
-  
+      const newMovies = responseData.results;
 
       setDataTwo(newMovies);
       console.log(data);
@@ -121,9 +118,6 @@ const MovieList = ({ search, setSearch }) => {
                   <h3>{movie.release_date.slice(0, 4)}</h3>
                   <span>{movie.vote_average}</span>
 
-                  {/* <div>{movie.genre_ids.map((genre)=> (
-                <div>{genre}</div>
-              ))}</div> */}
                   <p>{movie.overview}</p>
                 </div>
               </div>
@@ -139,7 +133,11 @@ const MovieList = ({ search, setSearch }) => {
             {dataTwo.map((movie) => (
               <div key={movie.id} className={classes.poster}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeDP37vMYgkI-FLO2_vGo9qGp1SltyyuRSiaYQI7yVBaLKoNXJ6LDD7wGxTrrZBPkSwV0&usqp=CAU`
+                  }
                   alt=""
                 />
                 <div className={classes.details}>

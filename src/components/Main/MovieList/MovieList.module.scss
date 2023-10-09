@@ -10,6 +10,7 @@
     max-width: 200px;
     overflow: hidden;
     border-radius: 10px;
+
   }
   
   .poster img {
@@ -46,7 +47,7 @@
     min-height: fit-content;
     min-width: 100%;
     max-height: 90%;
-    padding: 1.5em 1.5em 2em;
+    padding: 1.5em 1.5em 2em ;
     background: #000a;
     backdrop-filter: blur(16px) saturate(120%);
     transition: 0.5s;
@@ -54,5 +55,10 @@
     z-index: 2;
     opacity: 0;
     overflow: auto;
+
+  }
+
+  .details p {
+    margin-right: 1.5em;
   }
   
