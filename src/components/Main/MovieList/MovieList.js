@@ -140,7 +140,7 @@ const MovieList = ({ search, setSearch }) => {
               <div key={movie.id} className={classes.poster}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="img"
+                  alt=""
                 />
                 <div className={classes.details}>
                   <h2>{movie.title}</h2>
