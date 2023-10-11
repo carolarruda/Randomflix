@@ -16,7 +16,7 @@ const params = {
 const get = (url, query) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log('query',query);
+
       instance
         .get(url, {
           params: {
