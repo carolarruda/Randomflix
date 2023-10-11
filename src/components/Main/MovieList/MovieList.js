@@ -43,24 +43,16 @@ const MovieList = ({ search, setSearch }) => {
 
       const apiUrl = `https://api.themoviedb.org/3/search/movie?include_adult=false&api_key=${apiKey}&language=en-US&query=${searchQuery}`;
 
-
-
       const response = await fetch(apiUrl);
 
-
       if (!response.ok) {
-        console.log("here", !response.ok);
-
         throw new Error(`Error fetching movies. Status: ${response.status}`);
       }
-      console.log("Response:");
       const responseData = await response.json();
-      console.log("Response:", responseData);
 
       const newMovies = responseData.results;
 
       setDataTwo(newMovies);
-      console.log(data);
 
       newMovies.forEach((movie) => {
         uniqueMovieIds.add(movie.id);
@@ -68,7 +60,6 @@ const MovieList = ({ search, setSearch }) => {
 
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
-      console.log(error);
       console.error("Error fetching movies:", error);
     } finally {
       setLoading(false);
@@ -127,7 +118,6 @@ const MovieList = ({ search, setSearch }) => {
         </>
       ) : (
         <>
-          {" "}
           <h1>Results</h1>
           <div className={classes.movieGrid}>
             {dataTwo.map((movie) => (
@@ -144,10 +134,6 @@ const MovieList = ({ search, setSearch }) => {
                   <h2>{movie.title}</h2>
                   <h3>{movie.release_date.slice(0, 4)}</h3>
                   <span>{movie.vote_average}</span>
-
-                  {/* <div>{movie.genre_ids.map((genre)=> (
-              <div>{genre}</div>
-            ))}</div> */}
                   <p>{movie.overview}</p>
                 </div>
               </div>
